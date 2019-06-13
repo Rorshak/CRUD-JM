@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col s4">
+      <div class="card">
+        <div class="card-content">
+          <form #ventaControlForm="ngForm" (ngSubmit)="addVentaControl(ventaControlForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl._id" 
+              placeholder="Enter id">
+              <b>Fecha</b>
+            <div class="row">
+                
+              <div class="input-field col s12">
+                <input type="date" id="fechaVenta" name="fechaVenta" #fechaVenta="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.fechaVenta" 
+                  placeholder="Ingresa la Fecha">
+                  
+              </div>
+           
+              <div class="input-field col s12">
+                  <b>No. de Mesa</b>
+                <input type="text" name="mesa" #mesa="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.mesa" 
+                  placeholder="Ingresa el numero de mesa">
+              </div>
+             
+              <div class="input-field col s12">
+                  <b>Platillo/Bebida</b>
+                <input type="text" name="alimento_bebida" #alimento_bebida="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.alimento_bebida" 
+                  placeholder="Ingresa el Platillo o Bebida">
+              </div>
+              
+              <div class="input-field col s12">
+                  <b>Cantidad</b>
+                <input type="text" name="cantidad" #cantidad="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.cantidad" 
+                  placeholder="Ingresa la cantidad">
+              </div>
+             
+              <div class="input-field col s12">
+                  <b>Monto a Pagar $</b>
+                <input type="text" name="montoPagar" #montoPagar="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.montoPagar" 
+                  placeholder="Ingresa el monto a pagar">
+              </div>
+             
+              
+              <b>Tipo de Pago</b>
+  <select class="browser-default"  name="tipoPago" #tipoPago="ngModel" [(ngModel)]="ventaControlService.selectedVentaControl.tipoPago" >
+    <option value="" disabled selected>Elige una opción</option>
+    <option value="Tarjeta de Crédito/Débito">Tarjeta de Crédito/Débito</option>
+    <option value="Efectivo">Efectivo</option>
+  </select>
+              <div class="card-action">
+                <div class="input-field col s12">
+                  <button class="btn" style="margin-left: 2p">Save</button>
+                  <!--Limpiar Formulario-->
+                  <button class="btn right" (click)="resetForm(ventaControlForm)">Clean</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s8">
+      <table>
+        <thead>
+          <th>Fecha Venta</th>
+          <th>No. Mesa</th>
+          <th>Platillo/Bebida</th>
+          <th>Cantidad</th>
+          <th>Monto a Pagar</th>
+          <th>Tipo Pago</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ventaControl of ventaControlService.ventaControls">
+              <script>
+              
+                </script>
+              <td>{{ ventaControl.fechaVenta | date: "dd/MM/y" }}</td>
+              <td>{{ ventaControl.mesa }}</td>
+              <td>{{ ventaControl.alimento_bebida }}</td>
+              <td>{{ ventaControl.cantidad }}</td>
+              <td>{{ ventaControl.montoPagar }}</td>
+              <td>{{ ventaControl.tipoPago }}</td>
+             <td>
+               <a (click)='editVentaControl(ventaControl)'>
+                        <i class='material-icons'>edit</i>
+               </a>
+             </td>
+             <td>
+                <a (click)='deleteVentaControl(ventaControl._id)'>
+                  <i class='material-icons'>delete</i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
